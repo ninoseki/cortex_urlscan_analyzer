@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+from cortexutils.analyzer import Analyzer
+from urlscan import Urlscan, UrlscanException
+
+
+class UrlscanAnalyzer(Analyzer):
+    def __init__(self):
+        Analyzer.__init__(self)
+
+    def search(self, indicator):
+        """
+        Searches for a website using the indicator
+        :param indicator: domain, ip, url
+        :type indicator: str
+        :return: dict
+        """
+        res = Urlscan(indicator).search()
+        return res
+
+    def run(self):
+        try:
+            if self.get_data() != None and self.data_type in ['ip', 'domain', 'url']:
+                self.report({
+                    'indicator': self.search(self.get_data())
+                })
+        except UrlscanException as err:
+            self.error(str(err))
+
+    def summary(self, raw):
+        taxonomies = []
+        level = "info"
+        namespace = "urlscan.io"
+        predicate = "Search"
+
+        data = []
+        for r in raw["results"]:
+            data.append(r["result"])
+
+        if not data:
+            value = "\"0 result\""
+            taxonomies.append(self.build_taxonomy(
+                level, namespace, predicate, value))
+        else:
+            value = "\"{} results(s)\"".format(len(list(set(data))))
+            taxonomies.append(self.build_taxonomy(
+                level, namespace, predicate, value))
+
+        return {"taxonomies": taxonomies}
+
+
+if __name__ == '__main__':
+    UrlscanAnalyzer().run()

@@ -1,0 +1,10 @@
+{
+  "name": "urlscan.io",
+  "author": "ninoseki",
+  "license": "MIT",
+  "url": "https://github.com/ninoseki/cortex_urlscan_analyzer",
+  "version": "0.1.0",
+  "description": "Scan IPs, domains or URLs against urlscan.io",
+  "dataTypeList": ["ip", "domain", "url"],
+  "command": "urlscan/urlscan_analyzer.py"
+}

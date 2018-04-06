@@ -1,0 +1,39 @@
+<div class="panel panel-info" ng-if="success">
+    <div class="panel-heading">
+        urlscan.io search resutls for
+        <strong>{{artifact.data}}</strong>
+    </div>
+    <div class="panel-body">
+        <p ng-if="content.indicator.results.length == 0">
+            No result found.
+        </p>
+        <table class="table" ng-if="content.indicator.results">
+            <thead>
+                <th>URL</th>
+                <th>Result</th>
+                <th>Time</th>
+            </thead>
+            <tbody ng-repeat="r in content.indicator.results | limitTo:20">
+                <tr>
+                    <td>{{r.page.url}}</td>
+                    <td><a href="https://urlscan.io/result/{{r._id}}" target="_blank">https://urlscan.io/result/{{r._id}}</a></td>
+                    <td>{{r.task.time}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- General error  -->
+<div class="panel panel-danger" ng-if="!success">
+    <div class="panel-heading">
+        <strong>{{artifact.data | fang}}</strong>
+    </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal" ng-if="content.errorMessage">
+            <dt>
+                <i class="fa fa-warning"></i> urlscan.io: </dt>
+            <dd class="wrap">{{content.errorMessage}}</dd>
+        </dl>
+    </div>
+</div>

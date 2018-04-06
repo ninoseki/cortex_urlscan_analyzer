@@ -32,16 +32,13 @@ class UrlscanAnalyzer(Analyzer):
         namespace = "urlscan.io"
         predicate = "Search"
 
-        data = []
-        for r in raw["results"]:
-            data.append(r["result"])
-
-        if not data:
-            value = "\"0 result\""
+        total = raw["indicator"]["total"]
+        if total <= 1:
+            value = "\"{} result\"".format(total)
             taxonomies.append(self.build_taxonomy(
                 level, namespace, predicate, value))
         else:
-            value = "\"{} results(s)\"".format(len(list(set(data))))
+            value = "\"{} results\"".format(total)
             taxonomies.append(self.build_taxonomy(
                 level, namespace, predicate, value))
 

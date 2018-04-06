@@ -18,4 +18,3 @@ class Urlscan:
             return r.json()
         else:
             raise UrlscanException("urlscan.io returns %s" % r.status_code)
-

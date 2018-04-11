@@ -18,8 +18,9 @@ class UrlscanAnalyzer(Analyzer):
         return res
 
     def run(self):
+        targets = ['ip', 'domain', 'url']
         try:
-            if self.get_data() != None and self.data_type in ['ip', 'domain', 'url']:
+            if self.get_data() is not None and self.data_type in targets:
                 self.report({
                     'indicator': self.search(self.get_data())
                 })

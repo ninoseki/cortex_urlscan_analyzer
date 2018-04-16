@@ -2,7 +2,6 @@
 from cortexutils.analyzer import Analyzer
 from urlscan import Urlscan, UrlscanException
 
-
 class UrlscanAnalyzer(Analyzer):
     def __init__(self):
         Analyzer.__init__(self)
@@ -19,10 +18,14 @@ class UrlscanAnalyzer(Analyzer):
 
     def run(self):
         targets = ['ip', 'domain', 'url']
+        query = self.get_data()
+        if self.data_type is 'url':
+            query = '"{}"'.format(query)
+
         try:
-            if self.get_data() is not None and self.data_type in targets:
+            if query is not None and self.data_type in targets:
                 self.report({
-                    'indicator': self.search(self.get_data())
+                    'indicator': self.search(query)
                 })
         except UrlscanException as err:
             self.error(str(err))

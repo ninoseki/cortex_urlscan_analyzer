@@ -18,13 +18,13 @@ class UrlscanAnalyzer(Analyzer):
 
     def run(self):
         targets = ['ip', 'domain', 'url']
-        query = self.get_data()
-        if self.data_type is 'url':
-            query = ' "{}" '.format(query)
+        query = ' "{}" '.format(self.get_data())
 
         try:
-            if query is not None and self.data_type in targets:
+            if self.data_type in targets:
                 self.report({
+                    'type': self.data_type,
+                    'query': query,
                     'indicator': self.search(query)
                 })
         except UrlscanException as err:

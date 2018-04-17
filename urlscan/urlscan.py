@@ -8,7 +8,7 @@ class UrlscanException(Exception):
 
 class Urlscan:
     def __init__(self, query=""):
-        assert len(query) > 0, "Url must be defined"
+        assert len(query) > 0, "Qeury must be defined"
         self.query = query
 
     def search(self):

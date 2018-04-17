@@ -20,7 +20,7 @@ class UrlscanAnalyzer(Analyzer):
         targets = ['ip', 'domain', 'url']
         query = self.get_data()
         if self.data_type is 'url':
-            query = '"{}"'.format(query)
+            query = ' "{}" '.format(query)
 
         try:
             if query is not None and self.data_type in targets:

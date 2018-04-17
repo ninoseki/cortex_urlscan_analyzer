@@ -2,6 +2,7 @@
 from cortexutils.analyzer import Analyzer
 from urlscan import Urlscan, UrlscanException
 
+
 class UrlscanAnalyzer(Analyzer):
     def __init__(self):
         Analyzer.__init__(self)
@@ -18,7 +19,10 @@ class UrlscanAnalyzer(Analyzer):
 
     def run(self):
         targets = ['ip', 'domain', 'url']
-        query = ' "{}" '.format(self.get_data())
+        if self.data_type == 'url':
+            query = ' "{}" '.format(self.get_data())
+        else:
+            query = self.get_data()
 
         try:
             if self.data_type in targets:

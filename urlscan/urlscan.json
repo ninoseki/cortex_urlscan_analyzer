@@ -3,7 +3,7 @@
   "author": "ninoseki",
   "license": "MIT",
   "url": "https://github.com/ninoseki/cortex_urlscan_analyzer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Search IPs, domains or URLs on urlscan.io",
   "dataTypeList": ["ip", "domain", "url"],
   "command": "urlscan/urlscan_analyzer.py"

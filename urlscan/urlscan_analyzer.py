@@ -20,7 +20,7 @@ class UrlscanAnalyzer(Analyzer):
     def run(self):
         targets = ['ip', 'domain', 'url']
         if self.data_type == 'url':
-            query = ' "{}" '.format(self.get_data())
+            query = '"{}"'.format(self.get_data())
         else:
             query = self.get_data()
 
@@ -42,11 +42,12 @@ class UrlscanAnalyzer(Analyzer):
 
         total = raw["indicator"]["total"]
         if total <= 1:
-            value = "\"{} result\"".format(total)
+            value = "{} result".format(total)
             taxonomies.append(self.build_taxonomy(
                 level, namespace, predicate, value))
         else:
-            value = "\"{} results\"".format(total)
+            level = 'suspicious'
+            value = "{} results".format(total)
             taxonomies.append(self.build_taxonomy(
                 level, namespace, predicate, value))
 

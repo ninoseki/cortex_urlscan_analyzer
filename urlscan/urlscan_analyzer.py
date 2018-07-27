@@ -42,6 +42,7 @@ class UrlscanAnalyzer(Analyzer):
 
         total = raw["indicator"]["total"]
         if total <= 1:
+            level = 'suspicious' if total == 1 else 'info'
             value = "{} result".format(total)
             taxonomies.append(self.build_taxonomy(
                 level, namespace, predicate, value))

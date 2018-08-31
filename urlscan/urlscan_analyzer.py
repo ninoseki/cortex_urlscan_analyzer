@@ -10,7 +10,7 @@ class UrlscanAnalyzer(Analyzer):
     def search(self, indicator):
         """
         Searches for a website using the indicator
-        :param indicator: domain, ip, url
+        :param indicator: domain, ip, hash, url
         :type indicator: str
         :return: dict
         """
@@ -18,7 +18,7 @@ class UrlscanAnalyzer(Analyzer):
         return res
 
     def run(self):
-        targets = ['ip', 'domain', 'url']
+        targets = ['ip', 'domain', 'hash', 'url']
         if self.data_type == 'url':
             query = '"{}"'.format(self.get_data())
         else:

@@ -6,6 +6,7 @@ from urlscan import Urlscan, UrlscanException
 class UrlscanAnalyzer(Analyzer):
     def __init__(self):
         Analyzer.__init__(self)
+        self.api = Urlscan()
 
     def search(self, indicator):
         """
@@ -14,8 +15,15 @@ class UrlscanAnalyzer(Analyzer):
         :type indicator: str
         :return: dict
         """
-        res = Urlscan(indicator).search()
-        return res
+        search_result = self.api.search(indicator)
+        results = search_result.get("results", [])
+        for result in results:
+            uuid = result.get("_id", "")
+            _result = self.api.result(uuid)
+            result["verdicts"] = _result.get("verdicts", {})
+
+        search_result["result"] = result
+        return search_result
 
     def run(self):
         targets = ['ip', 'domain', 'hash', 'url']
